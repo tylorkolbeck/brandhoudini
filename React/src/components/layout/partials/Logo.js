@@ -7,7 +7,14 @@ const Logo = ({ className, ...props }) => {
   const classes = classNames("brand", className);
 
   return (
-    <div {...props} className={classes}>
+    <div
+      {...props}
+      className={classes}
+      style={{
+        display: "flex",
+        alignItems: "baseline"
+      }}
+    >
       <h1 className="m-0">
         <Link to="/">
           <Image
@@ -18,6 +25,7 @@ const Logo = ({ className, ...props }) => {
           />
         </Link>
       </h1>
+      <h2 className="m-0 ml-16">Brand Houdini</h2>
     </div>
   );
 };

@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { Link } from 'react-router-dom';
-import Logo from './partials/Logo';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { Link } from "react-router-dom";
+import Logo from "./partials/Logo";
 
 const propTypes = {
   active: PropTypes.bool,
@@ -11,19 +11,18 @@ const propTypes = {
   hideSignin: PropTypes.bool,
   bottomOuterDivider: PropTypes.bool,
   bottomDivider: PropTypes.bool
-}
+};
 
 const defaultProps = {
   active: false,
-  navPosition: '',
+  navPosition: "",
   hideNav: false,
   hideSignin: false,
   bottomOuterDivider: false,
   bottomDivider: false
-}
+};
 
 class Header extends React.Component {
-
   state = {
     isActive: false
   };
@@ -33,37 +32,42 @@ class Header extends React.Component {
 
   componentDidMount() {
     this.props.active && this.openMenu();
-    document.addEventListener('keydown', this.keyPress);
-    document.addEventListener('click', this.clickOutside);
+    document.addEventListener("keydown", this.keyPress);
+    document.addEventListener("click", this.clickOutside);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.keyPress);
-    document.addEventListener('click', this.clickOutside);
+    document.removeEventListener("keydown", this.keyPress);
+    document.addEventListener("click", this.clickOutside);
     this.closeMenu();
   }
 
   openMenu = () => {
-    document.body.classList.add('off-nav-is-active');
-    this.nav.current.style.maxHeight = this.nav.current.scrollHeight + 'px';
+    document.body.classList.add("off-nav-is-active");
+    this.nav.current.style.maxHeight = this.nav.current.scrollHeight + "px";
     this.setState({ isActive: true });
-  }
+  };
 
   closeMenu = () => {
-    document.body.classList.remove('off-nav-is-active');
+    document.body.classList.remove("off-nav-is-active");
     this.nav.current && (this.nav.current.style.maxHeight = null);
     this.setState({ isActive: false });
-  }
+  };
 
   keyPress = (e) => {
     this.state.isActive && e.keyCode === 27 && this.closeMenu();
-  }
+  };
 
   clickOutside = (e) => {
-    if (!this.nav.current) return
-    if (!this.state.isActive || this.nav.current.contains(e.target) || e.target === this.hamburger.current) return;
+    if (!this.nav.current) return;
+    if (
+      !this.state.isActive ||
+      this.nav.current.contains(e.target) ||
+      e.target === this.hamburger.current
+    )
+      return;
     this.closeMenu();
-  }
+  };
 
   render() {
     const {
@@ -78,24 +82,23 @@ class Header extends React.Component {
     } = this.props;
 
     const classes = classNames(
-      'site-header',
-      bottomOuterDivider && 'has-bottom-divider',
+      "site-header",
+      bottomOuterDivider && "has-bottom-divider",
       className
     );
 
     return (
-      <header
-        {...props}
-        className={classes}
-      >
-        <div className="container">
-          <div className={
-            classNames(
-              'site-header-inner',
-              bottomDivider && 'has-bottom-divider'
-            )}>
+      <header {...props} className={classes}>
+        <div className="container mt-16">
+          <div
+            className={classNames(
+              "site-header-inner",
+              bottomDivider && "has-bottom-divider"
+            )}
+          >
             <Logo />
-            {!hideNav &&
+
+            {!hideNav && (
               <React.Fragment>
                 <button
                   ref={this.hamburger}
@@ -109,36 +112,60 @@ class Header extends React.Component {
                 </button>
                 <nav
                   ref={this.nav}
-                  className={
-                    classNames(
-                      'header-nav',
-                      this.state.isActive && 'is-active'
-                    )}>
+                  className={classNames(
+                    "header-nav",
+                    this.state.isActive && "is-active"
+                  )}
+                >
                   <div className="header-nav-inner">
-                    <ul className={
-                      classNames(
-                        'list-reset text-xxs',
+                    <ul
+                      className={classNames(
+                        "list-reset text-xxs",
                         navPosition && `header-nav-${navPosition}`
-                      )}>
+                      )}
+                    >
                       <li>
-                        <Link to="/secondary/" onClick={this.closeMenu}>Secondary page</Link>
+                        <Link to="/secondary/" onClick={this.closeMenu}>
+                          Branding
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/secondary/" onClick={this.closeMenu}>
+                          LLC vs Corp
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/secondary/" onClick={this.closeMenu}>
+                          Online Presence
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/secondary/" onClick={this.closeMenu}>
+                          FAQ
+                        </Link>
                       </li>
                     </ul>
-                    {!hideSignin &&
-                      <ul
-                        className="list-reset header-nav-right"
-                      >
+                    {!hideSignin && (
+                      <ul className="list-reset header-nav-right">
                         <li>
-                          <Link to="/signup/" className="button button-primary button-wide-mobile button-sm" onClick={this.closeMenu}>Sign up</Link>
+                          <Link
+                            to="/signup/"
+                            className="button button-primary button-wide-mobile button-sm"
+                            onClick={this.closeMenu}
+                          >
+                            Contact Us
+                          </Link>
                         </li>
-                      </ul>}
+                      </ul>
+                    )}
                   </div>
                 </nav>
-              </React.Fragment>}
+              </React.Fragment>
+            )}
           </div>
         </div>
       </header>
-    )
+    );
   }
 }
 
