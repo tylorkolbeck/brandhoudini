@@ -54,11 +54,11 @@ class Header extends React.Component {
     this.setState({ isActive: false });
   };
 
-  keyPress = (e) => {
+  keyPress = e => {
     this.state.isActive && e.keyCode === 27 && this.closeMenu();
   };
 
-  clickOutside = (e) => {
+  clickOutside = e => {
     if (!this.nav.current) return;
     if (
       !this.state.isActive ||
@@ -144,20 +144,14 @@ class Header extends React.Component {
                           FAQ
                         </Link>
                       </li>
-                    </ul>
-                    {!hideSignin && (
-                      <ul className="list-reset header-nav-right">
+                      {!hideSignin && (
                         <li>
-                          <Link
-                            to="/signup/"
-                            className="button button-primary button-wide-mobile button-sm"
-                            onClick={this.closeMenu}
-                          >
+                          <Link to="/signup/" onClick={this.closeMenu}>
                             Contact Us
                           </Link>
                         </li>
-                      </ul>
-                    )}
+                      )}
+                    </ul>
                   </div>
                 </nav>
               </React.Fragment>

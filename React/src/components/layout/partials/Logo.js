@@ -25,7 +25,9 @@ const Logo = ({ className, ...props }) => {
           />
         </Link>
       </h1>
-      <h2 className="m-0 ml-16">Brand Houdini</h2>
+      <h2 className="m-0 ml-16" style={{ whiteSpace: "nowrap" }}>
+        Brand Houdini
+      </h2>
     </div>
   );
 };
