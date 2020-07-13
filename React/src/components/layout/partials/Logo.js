@@ -22,6 +22,7 @@ const Logo = ({ className, ...props }) => {
             alt="Neon"
             width={48}
             height={48}
+            style={{ maxWidth: "none" }}
           />
         </Link>
       </h1>
